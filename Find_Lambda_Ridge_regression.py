@@ -119,10 +119,6 @@ def transform_data(X):
             X_transformed[i, j + 15] = np.cos(X[i, j])
         X_transformed[i, 20] = 1
 
-    #print(X_transformed)
-
-    #print(X_transformed)
-
     assert X_transformed.shape == (700, 21)
     return X_transformed
 
