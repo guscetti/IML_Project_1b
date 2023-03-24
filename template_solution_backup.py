@@ -55,13 +55,14 @@ def fit(X, y):
     w: array of floats: dim = (21,), optimal parameters of linear regression
     """
     #w = np.zeros((21,))
-    #X_transformed = transform_data(X)
+    X_transformed = transform_data(X)
     # TODO: Enter your code here
 
+    X_transformed_T = X_transformed.transpose()
 
     # Inverse = np.linalg.inv(np.matmul(phi_T, phi))
 
-    w = np.dot(np.linalg.inv(np.matmul(transform_data(X).transpose(), transform_data(X))), np.dot(transform_data(X).transpose(), y))
+    w = np.dot(np.linalg.inv(np.matmul(X_transformed_T, X_transformed)), np.dot(X_transformed_T, y))
 
     assert w.shape == (21,)
     print(w)
