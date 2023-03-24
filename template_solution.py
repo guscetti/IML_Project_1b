@@ -82,7 +82,7 @@ if __name__ == "__main__":
     X = data.to_numpy()
     #print(X)
     # The function retrieving optimal LR parameters
-    w = fit(X, y, 300)
+    w = fit(X, y, 318.5)
     # Save results in the required format
     np.savetxt("./results.csv", w, fmt="%.12f")
     np.savetxt("./x_values.csv", X, fmt="%.12f")
