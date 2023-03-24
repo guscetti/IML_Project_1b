@@ -25,6 +25,17 @@ def transform_data(X):
     """
     X_transformed = np.zeros((700, 21))
     # TODO: Enter your code here
+
+    for i in range(len(X)):
+        for j in range(0, 5):
+            X_transformed[i, j] = X[i, j]
+            X_transformed[i, j + 5] = X[i, j] ** 2
+            X_transformed[i, j + 10] = np.exp(X[i, j])
+            X_transformed[i, j + 15] = np.cos(X[i, j])
+        X_transformed[i, 20] = 1
+
+    #print(X_transformed)
+
     assert X_transformed.shape == (700, 21)
     return X_transformed
 
@@ -43,10 +54,18 @@ def fit(X, y):
     ----------
     w: array of floats: dim = (21,), optimal parameters of linear regression
     """
-    w = np.zeros((21,))
+    #w = np.zeros((21,))
     X_transformed = transform_data(X)
     # TODO: Enter your code here
+
+    X_transformed_T = X_transformed.transpose()
+
+    # Inverse = np.linalg.inv(np.matmul(phi_T, phi))
+
+    w = np.dot(np.linalg.inv(np.matmul(X_transformed_T, X_transformed)), np.dot(X_transformed_T, y))
+
     assert w.shape == (21,)
+    print(w)
     return w
 
 
@@ -57,9 +76,10 @@ if __name__ == "__main__":
     y = data["y"].to_numpy()
     data = data.drop(columns=["Id", "y"])
     # print a few data samples
-    print(data.head())
+    #print(data.head())
 
     X = data.to_numpy()
+    #print(X)
     # The function retrieving optimal LR parameters
     w = fit(X, y)
     # Save results in the required format
